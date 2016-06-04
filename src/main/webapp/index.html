@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Crypto Demo</title>
+<script src="aes.js"></script>
+<script src="pad-iso10126-min.js"></script>
+</head>
+<body>
+<form name="form" action="crypto" method="post">
+密钥<input id="key" name="key" value="1234567812345678" /><br /><br />
+明文<input id="text" name="text" value="text" /><br /><br />
+</form>
+<button onclick="btnEncrypt()">加密</button>
+<button onclick="btnDecrypt()">解密</button>
+<button onclick="btnSend()">发送</button>
+</body>
+
+<script type="text/javascript">
+function btnEncrypt() {
+	var keyStr = document.getElementById("key").value;
+	var input = document.getElementById("text");
+	var sendData = CryptoJS.enc.Utf8.parse(input.value);
+    var key = CryptoJS.MD5(keyStr);
+    var encrypted = CryptoJS.AES.encrypt(sendData, key,{iv:key,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.Iso10126});
+	input.value = encrypted;
+}
+function btnDecrypt() {
+	var keyStr = document.getElementById("key").value;
+	var input = document.getElementById("text");
+    var key = CryptoJS.MD5(keyStr);
+	input.value = CryptoJS.AES.decrypt(input.value, key, {iv:key,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.Iso10126}).toString(CryptoJS.enc.Utf8);
+}
+function btnSend() {
+	form.submit();
+}
+</script>
+</html>
