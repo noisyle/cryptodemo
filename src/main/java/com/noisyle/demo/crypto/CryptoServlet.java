@@ -28,7 +28,7 @@ public class CryptoServlet extends HttpServlet {
 			keyBytes = md.digest(keyBytes);
 			
 			bytes = Base64.decode(bytes);
-			bytes = AESUtils.decrypt(bytes, keyBytes, false, keyBytes);
+			bytes = CryptoUtils.decryptAES(bytes, keyBytes, false, keyBytes);
 			
 			System.out.println("明文：" + new String(bytes, "UTF-8"));
 			

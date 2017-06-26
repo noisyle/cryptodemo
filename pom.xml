@@ -24,17 +24,11 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>cryptodemo</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -51,7 +45,8 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.9.v20150224</version>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<!-- <scanIntervalSeconds>10</scanIntervalSeconds> -->
+					<reload>manual</reload>
 					<httpConnector>
 						<port>8081</port>
 					</httpConnector>
